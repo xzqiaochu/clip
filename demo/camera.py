@@ -1,11 +1,8 @@
 import cv2
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 while True:
-    # 读取并丢弃缓冲区中的帧，直到只剩下一帧为止
-    # while cap.get(cv2.CAP_PROP_FRAME_COUNT) > 1:
-    #     ret, frame = cap.read()
 
     # 获取一帧视频
     ret, frame = cap.read()

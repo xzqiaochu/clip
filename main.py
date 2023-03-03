@@ -4,7 +4,7 @@ import time, json
 import myclip.clip3 as myclip
 
 
-SOURCE = 1
+SOURCE = 0
 LANGUAGE = 'cn'
 DATASET_PATH = "./datasets/garbage2"
 LABEL_PATH = "./labels/labels_en.json"

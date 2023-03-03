@@ -1,3 +1,4 @@
+# https://github.com/openai/CLIP
 import torch
 import clip
 from PIL import Image

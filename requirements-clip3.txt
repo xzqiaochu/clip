@@ -1,2 +1,2 @@
 opencv-python
-cn_clip
+git+https://github.com/OFA-Sys/Chinese-CLIP.git

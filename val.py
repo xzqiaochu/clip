@@ -1,10 +1,10 @@
 from PIL import Image
-import os, sys, time, random, json
-import myclip.clip3 as myclip
+import os, time, random, json
+import myclip.clip1 as myclip
 
 
 NUM = 1000
-LANGUAGE = 'cn'
+LANGUAGE = 'en'
 DATASET_PATH = "./datasets/garbage2"
 LABEL_PATH = "./labels/labels_en.json"
 SELECT_PATH = "./labels/labels_select.json"

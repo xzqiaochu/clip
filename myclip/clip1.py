@@ -7,7 +7,7 @@ def setup(labels):
     global device, model, preprocess, text_features
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model, preprocess = clip.load("ViT-B/32", device=device)
+    model, preprocess = clip.load("ViT-B/32", device=device, download_root='./model')
     text = clip.tokenize(labels).to(device)
 
     with torch.no_grad():
