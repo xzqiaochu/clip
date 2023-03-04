@@ -2,4 +2,4 @@
 __pycache__/
 *.pt
 /Chinese-CLIP/
-/model/
+/models/

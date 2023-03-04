@@ -144,7 +144,8 @@ def build_engine(
     builder: Builder = trt.Builder(logger)
     config: IBuilderConfig = builder.create_builder_config()
     if workspace_size is not None:
-        config.set_memory_pool_limit(trt.tensorrt.MemoryPoolType.DLA_GLOBAL_DRAM, workspace_size)
+        config.max_workspace_size = workspace_size
+        # config.set_memory_pool_limit(trt.tensorrt.MemoryPoolType.DLA_GLOBAL_DRAM, workspace_size)
     config.set_tactic_sources(
         tactic_sources=1 << int(trt.TacticSource.CUBLAS)
         | 1 << int(trt.TacticSource.CUBLAS_LT)

@@ -7,7 +7,7 @@ def setup(labels):
     global device, model, preprocess, text_features
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model, preprocess = clip.load_from_name("ViT-B-16", device=device, download_root='./model')
+    model, preprocess = clip.load_from_name("ViT-B-16", device=device, download_root='./models/')
     model.eval()
     text = clip.tokenize(labels).to(device)
 
@@ -27,9 +27,8 @@ def predict(img):
         logit_scale = model.logit_scale.exp()
         logits_per_image = logit_scale * image_features @ text_features.t()
 
-        probs = logits_per_image.softmax(dim=-1).cpu().numpy()
+        probs = logits_per_image.softmax(dim=-1).cpu().tolist()[0]
 
-    probs = list(probs[0])
     max_p = max(probs)
     max_i = probs.index(max_p)
 
