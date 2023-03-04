@@ -22,7 +22,7 @@ def getFPS():
 
 def main():
     labels = []
-    with open(LABEL_CSV, 'r') as file:
+    with open(LABEL_CSV, 'r', encoding='gbk') as file:
         reader = csv.reader(file)
         for row in reader:
             labels.append(row)

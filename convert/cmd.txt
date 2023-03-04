@@ -1,13 +1,13 @@
 # pytorch转onnx
-python convert/pytorch_to_onnx.py --model-arch ViT-B-16 --pytorch-ckpt-path ./model/clip_cn_vit-b-16.pt --save-onnx-path ./model/vit-b-16 --convert-text --convert-vision
+python convert/pytorch_to_onnx.py --model-arch ViT-B-16 --pytorch-ckpt-path ./models/clip_cn_vit-b-16.pt --save-onnx-path ./models/vit-b-16 --convert-text --convert-vision
 
 
 # onnx转TensorRT（text+img）
-python convert/onnx_to_tensorrt.py --model-arch ViT-B-16 --convert-text --text-onnx-path ./model/vit-b-16.txt.fp16.onnx --convert-vision --vision-onnx-path ./model/vit-b-16.img.fp16.onnx --save-tensorrt-path ./model/vit-b-16 --fp16
+python convert/onnx_to_tensorrt.py --model-arch ViT-B-16 --convert-text --text-onnx-path ./models/vit-b-16.txt.fp16.onnx --convert-vision --vision-onnx-path ./models/vit-b-16.img.fp16.onnx --save-tensorrt-path ./models/vit-b-16 --fp16
 # 单独转text
-python convert/onnx_to_tensorrt.py --model-arch ViT-B-16 --convert-text --text-onnx-path ./model/vit-b-16.txt.fp16.onnx --save-tensorrt-path ./model/vit-b-16 --fp16
+python convert/onnx_to_tensorrt.py --model-arch ViT-B-16 --convert-text --text-onnx-path ./models/vit-b-16.txt.fp16.onnx --save-tensorrt-path ./models/vit-b-16 --fp16
 # 单独转img
-python convert/onnx_to_tensorrt.py --model-arch ViT-B-16 --convert-vision --vision-onnx-path ./model/vit-b-16.img.fp16.onnx --save-tensorrt-path ./model/vit-b-16 --fp16
+python convert/onnx_to_tensorrt.py --model-arch ViT-B-16 --convert-vision --vision-onnx-path ./models/vit-b-16.img.fp16.onnx --save-tensorrt-path ./models/vit-b-16 --fp16
 
 
 # 把整个系统的OOM给禁用掉（默认为0，表示开启）
