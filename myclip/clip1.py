@@ -6,6 +6,11 @@ import clip
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
+def setup(labels):
+    loadModel()
+    calcText(labels)
+
+
 def loadModel():
     global model, preprocess
     model, preprocess = clip.load("ViT-B/32", download_root='./models/')

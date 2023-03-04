@@ -10,6 +10,11 @@ txt_trt_model_path="./models/vit-b-16.txt.fp16.trt"
 model_arch = "ViT-B-16"
 
 
+def setup(labels):
+    calcText(labels)
+    loadModel()
+
+
 def loadModel():
     global model, preprocess
     # 图像模型

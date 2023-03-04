@@ -13,8 +13,7 @@ DATASET_PATH = "./datasets/garbage2"
 def main():
     labels = loadLabels(LABEL_CSV)
     
-    myclip.loadModel()
-    myclip.calcText(labels)
+    myclip.setup(labels)
 
     precise_cnt = 0
     correct_cnt = 0

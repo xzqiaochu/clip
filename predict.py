@@ -12,8 +12,7 @@ LABEL_CSV = "./labels/2022.csv"
 def main():
     labels = loadLabels(LABEL_CSV)
 
-    myclip.loadModel()
-    myclip.calcText(labels)
+    myclip.setup(labels)
 
     cap = cv2.VideoCapture(SOURCE)
     
