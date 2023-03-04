@@ -10,13 +10,23 @@ txt_trt_model_path="./models/vit-b-16.txt.fp16.trt"
 model_arch = "ViT-B-16"
 
 
-def setup(labels):
-    global text_features, preprocess, img_trt_model
-    
+def loadModel():
+    global model, preprocess
+    # 图像模型
+    model = TensorRTModel(img_trt_model_path)
+    preprocess = image_transform(_MODEL_INFO[model_arch]['input_resolution'])
+
+
+def calcText(labels):
+    global text_features
+
+    # 使用中文标签
+    labels = [x[1] for x in labels]
+    text = clip.tokenize(labels).cuda()
+
     # 文本模型
     txt_trt_model = TensorRTModel(txt_trt_model_path)
-    # 计算文本特征
-    text = clip.tokenize(labels).cuda()
+    
     text_features = []
     for i in range(len(text)):
         text_feature = txt_trt_model(inputs={'text': torch.unsqueeze(text[i], dim=0)})['unnorm_text_features']
@@ -24,17 +34,13 @@ def setup(labels):
     text_features = torch.squeeze(torch.stack(text_features), dim=1)
     text_features = text_features / text_features.norm(dim=1, keepdim=True) # 归一化
 
-    # 图像模型
-    preprocess = image_transform(_MODEL_INFO[model_arch]['input_resolution'])
-    img_trt_model = TensorRTModel(img_trt_model_path)
-
 
 def predict(img):
 
     image = preprocess(img).unsqueeze(0).cuda()
     
     with torch.no_grad(), torch.cuda.amp.autocast():
-        image_features = img_trt_model(inputs={'image': image})['unnorm_image_features']
+        image_features = model(inputs={'image': image})['unnorm_image_features']
         image_features /= image_features.norm(dim=1, keepdim=True)
 
         logits_per_image = 100 * image_features @ text_features.t()

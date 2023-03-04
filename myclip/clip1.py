@@ -3,13 +3,22 @@ import torch
 import clip
 
 
-def setup(labels):
-    global device, model, preprocess, text_features
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    model, preprocess = clip.load("ViT-B/32", device=device, download_root='./models/')
+
+def loadModel():
+    global model, preprocess
+    model, preprocess = clip.load("ViT-B/32", download_root='./models/')
+
+
+def calcText(labels):
+    global text_features
+
+    # 使用英文标签
+    labels = [x[2] for x in labels]
+
     text = clip.tokenize(labels).to(device)
-
+    
     with torch.no_grad():
         text_features = model.encode_text(text)
         text_features /= text_features.norm(dim=1, keepdim=True)

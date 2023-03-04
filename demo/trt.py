@@ -9,7 +9,7 @@ from cn_clip.clip import load_from_name, available_models
 from cn_clip.clip.utils import _MODELS, _MODEL_INFO, _download, available_models, create_model, image_transform
 
 # 载入TensorRT图像侧模型（**请替换${DATAPATH}为实际的路径**）
-img_trt_model_path="./model/vit-b-16.img.fp16.trt"
+img_trt_model_path="./models/vit-b-16.img.fp16.trt"
 img_trt_model = TensorRTModel(img_trt_model_path)
 
 # 预处理图片
@@ -24,7 +24,7 @@ image_features /= image_features.norm(dim=-1, keepdim=True) # 归一化后的Chi
 print(image_features.shape) # Torch Tensor shape: [1, 特征向量维度]
 
 # 载入TensorRT文本侧模型（**请替换${DATAPATH}为实际的路径**）
-txt_trt_model_path="./model/vit-b-16.txt.fp16.trt"
+txt_trt_model_path="./models/vit-b-16.txt.fp16.trt"
 txt_trt_model = TensorRTModel(txt_trt_model_path)
 
 # 为4条输入文本进行分词。序列长度指定为52，需要和转换ONNX模型时保持一致（参见ONNX转换时的context-length参数）
